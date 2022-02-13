@@ -1,0 +1,221 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,400;0,700;1,100;1,400;1,700&display=swap");
+
+body {
+  font-family: "JetBrains Mono", monospace;
+  line-height: 1.6rem;
+}
+.link-header,
+.link-footer {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.link-header:hover,
+.link-footer:hover {
+  text-decoration: underline;
+}
+
+a:hover {
+  color: inherit;
+}
+
+nav a,
+footer a:hover {
+  color: black;
+}
+
+footer a,
+footer a:hover {
+  color: white;
+}
+
+nav ul,
+footer ul {
+  font-size: 0.8em;
+}
+
+nav a,
+footer a {
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1em;
+}
+
+p {
+  font-weight: 400;
+}
+
+.navbar-collapse {
+  flex-grow: 0 !important;
+}
+
+.navbar {
+  padding: 2em 4em;
+}
+
+.intro {
+  padding: 12em 1em 8em 1em;
+}
+
+.logo,
+.logo-footer {
+  font-size: 1em;
+  font-weight: 800;
+}
+
+.logo:hover,
+.logo-footer:hover {
+  font-style: italic;
+}
+
+.boton-portafolio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6em;
+}
+
+/*Estilos grids*/
+.grid-container {
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 33%);
+  gap: 5px;
+  overflow: hidden;
+}
+
+.grid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(85%);
+}
+
+.grid-img:hover {
+  filter: grayscale(0%);
+}
+
+footer {
+  width: 100%;
+  padding: 7em 4em 6em 4em;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  align-items: center;
+}
+
+.footer-item {
+  display: flex;
+  width: 33%;
+}
+
+.redes {
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+.logo-footer {
+  flex-direction: row-reverse;
+}
+
+.intro-inicio,
+.bloque-boton {
+  text-align: center;
+}
+.intro-inicio {
+  height: 100vh;
+  padding: 1em;
+}
+/*Iconos redes*/
+.icono-redes {
+  margin: 0.3em;
+  width: 30px;
+}
+
+.icono-redes:hover {
+  opacity: 0.7;
+}
+
+.footer-item ul {
+  flex-wrap: wrap;
+}
+
+.bloque-boton {
+  margin-top: 2em;
+}
+
+.boton {
+  border: 1px solid black;
+  color: black;
+  padding: 8px 30px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 40px;
+}
+
+/*Responsive*/
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+    line-height: 1.4em;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 667px) {
+  nav ul {
+    padding-top: 1em;
+  }
+
+  footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5em 2em 5em 2em;
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5em 4em 2.5em 4em;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .footer-item {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-bottom: 1em;
+  }
+
+  .menu-2 ul {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .redes {
+    order: -1;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 100%);
+  }
+}
