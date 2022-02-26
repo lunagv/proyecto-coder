@@ -49,8 +49,13 @@ h3 {
   margin-bottom: 1em;
 }
 
+.sobreMi h5 {  
+  line-height: 1.8em;
+
+}
 p {
   font-weight: 400;
+  
 }
 
 .navbar-collapse {
@@ -63,6 +68,11 @@ p {
 
 .intro {
   padding: 12em 1em 8em 1em;
+}
+
+.sobreMi {
+  padding-top: 9em  ;
+  padding-bottom: 14em;
 }
 
 .logo,
@@ -288,3 +298,34 @@ footer {
   margin-right: 1em;
   border-radius: 40px;
 }
+
+
+/* estilos skills */
+.contenedor-skill {
+  width: 100%;
+  margin-bottom: 1em;
+  background-color: #dddddd;
+}
+.skill {
+  text-align: right; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  color: white;
+}
+
+.branding{
+  width: 90%; 
+  background-color: black;
+}
+.fotografia {
+  width: 80%; 
+  background-color:black;
+} 
+.web {width: 65%; 
+  background-color:black;
+} 
+.estrategia {
+  width: 65%; 
+  background-color: black;
+}
+
