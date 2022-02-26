@@ -1,16 +1,35 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box; }
+.bg--light {
+  background-color: #f0f0f0; }
 
-body {
-  font-family: "JetBrains Mono", monospace;
-  line-height: 1.6rem; }
-  body a {
-    color: inherit;
-    text-decoration: none; }
-    body a:hover {
-      color: inherit; }
+.bg--dark {
+  background-color: #999999; }
+
+.nav--secundario {
+  background-color: #f0f0f0; }
+
+.logo, nav ul .nav__logo, footer .footer__logo {
+  font-size: 1em;
+  font-weight: 800; }
+  .logo:hover, nav ul .nav__logo:hover, footer .footer__logo:hover {
+    font-style: italic; }
+
+.grid__img, .grid__container--tercios img, .grid__container--mid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; }
+
+.grid__container, .grid__container--tercios, .grid__container--mid {
+  width: 100%;
+  height: auto;
+  display: grid;
+  gap: 5px;
+  overflow: hidden; }
+
+.grid__container--tercios {
+  grid-template-columns: repeat(3, 33%); }
+
+.grid__container--mid {
+  grid-template-columns: repeat(2, 50%); }
 
 nav {
   display: flex;
@@ -30,11 +49,8 @@ nav {
       nav ul li a:hover {
         text-decoration: underline;
         color: black; }
-  nav .logo {
-    font-size: 1em;
-    font-weight: 800; }
-    nav .logo:hover {
-      font-style: italic; }
+    nav ul .nav__logo {
+      color: black; }
 
 footer {
   width: 100%;
@@ -44,22 +60,33 @@ footer {
   background-color: black;
   align-items: center; }
   footer a {
-    color: white;
     text-decoration: none; }
   footer ul {
     font-size: 0.8em; }
     footer ul li {
       padding-right: 0.5rem;
       padding-left: 0.5rem; }
-      footer ul li a:hover {
-        text-decoration: underline;
-        color: white; }
-  footer .logo {
-    font-size: 1em;
-    font-weight: 800; }
-    footer .logo:hover {
-      font-style: italic;
-      color: white; }
+      footer ul li a {
+        color: white !important; }
+        footer ul li a:hover {
+          text-decoration: underline;
+          color: white; }
+  footer .footer__logo {
+    color: white; }
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box; }
+
+body {
+  font-family: "JetBrains Mono", monospace;
+  line-height: 1.6rem; }
+  body a {
+    color: inherit;
+    text-decoration: none; }
+    body a:hover {
+      color: inherit; }
 
 .navbar {
   padding: 2em 4em; }
@@ -95,30 +122,6 @@ footer {
   width: 30px; }
   .icono-redes:hover {
     opacity: 0.7; }
-
-.grid-container {
-  width: 100%;
-  height: auto;
-  display: grid;
-  grid-template-columns: repeat(3, 33%);
-  gap: 5px;
-  overflow: hidden; }
-  .grid-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; }
-
-.grid-container-mid {
-  width: 100%;
-  height: auto;
-  display: grid;
-  grid-template-columns: repeat(2, 50%);
-  gap: 5px;
-  overflow: hidden; }
-  .grid-container-mid img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; }
 
 .portafolio-descripcion {
   color: white;
