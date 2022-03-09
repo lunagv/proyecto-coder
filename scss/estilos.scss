@@ -1,8 +1,196 @@
+// Responsive mixins 
+// Bootstrap breakpoints
+
+@mixin tablet {
+  @media only screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width: 992px) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media only screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+
+.me img {
+  width: 80%;
+}
+
+.container {
+  width: 85%;
+}
+
+
+.contenedor-skill {
+  width: 100%;
+  margin-bottom: 1em;
+  background-color: #dddddd;
+}
+.skill {
+  text-align: right; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  color: white;
+}
+
+.branding{
+  width: 90%; 
+  background-color: black;
+}
+.fotografia {
+  width: 80%; 
+  background-color:black;
+} 
+.web {width: 65%; 
+  background-color:black;
+} 
+.estrategia {
+  width: 65%; 
+  background-color: black;
+}
+
+
+input[type=text], textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+
+//Desaturar
+.portafolio__bloque--desaturar {
+
+  transition: .5s ease-in-out; 
+
+  filter: grayscale(1);
+
+}
+
+.portafolio__bloque--desaturar img:hover { 
+
+  filter: none;
+
+}
+
+.container-fluid{
+  max-width: 1320px;
+}
+
+
+.portafolio-descripcion{
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  
+}
+
+.prueba-grid{
+  position: relative;
+  transition: .5s ease-in-out; 
+
+  filter: grayscale(1);
+}
+
+.overlay img:hover { 
+
+  filter: none;
+
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #00000067;
+  
+}
+
+.prueba-grid .overlay {
+  transition: .5s ease-in-out; 
+  filter: grayscale(1);
+    &:hover {
+      opacity: 1;
+      
+    }
+  
+  
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  
+}
+
+
+//Estilos hover menus
+.link {
+  cursor: pointer;
+  font-size: 1.1em;
+  position: relative;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.link::before,
+.link::after {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  top: 100%;
+  left: 0;
+  pointer-events: none;
+}
+
+.link::before {
+  content: '';
+}
+
+.link--metis {
+  
+}
+
+.link--metis::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+
+.link--metis:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
+}
+
 
 // Map para fondos en seccion About Me
 $colors: (
-  light: #f0f0f0,
-  dark: #999999,
+  light: #f2f2f291,
+  dark: #dadada,
 );
 
 @each $name-color, $bgcolor in $colors {
@@ -49,6 +237,13 @@ $colors: (
   img {
     @extend .grid__img;
   }
+  @media only screen and (min-width: 576px) and (max-width: 768px) {
+    grid-template-columns: repeat(2, 50%);
+  }
+
+  @media only screen and (min-width: 375px) and (max-width: 667px) {
+    grid-template-columns: repeat(1, 100%);
+  }
 }
 
 .grid__container--mid {
@@ -57,6 +252,9 @@ $colors: (
   img {
     @extend .grid__img;
   }
+  @media only screen and (min-width: 375px) and (max-width: 667px) {
+    grid-template-columns: repeat(1, 100%);
+  }
 }
 
 
@@ -64,7 +262,6 @@ $colors: (
 nav {
   display: flex;
   flex-direction: column;
-  padding: 2.5em 4em 2.5em 4em;
   width: 100%;
   justify-content: center;
   align-items: center;
@@ -76,14 +273,7 @@ nav {
     ul {
       font-size: 0.8em;
       li{
-          padding-right: 0.5rem;
-          padding-left: 0.5rem;
-          a {
-              &:hover{
-                  text-decoration: underline;
-                  color: black;
-              }
-          }
+          padding-left: 2.5em;
       }
       
       .nav__logo {
@@ -111,12 +301,11 @@ footer{
     ul{
       font-size: 0.8em;
       li{
-          padding-right: 0.5rem;
-          padding-left: 0.5rem;
+          padding-left: 2.2em;
           a {
             color: white !important;
               &:hover{
-                  text-decoration: underline;
+                  text-decoration: none;
                   color: white;
               }
           }
@@ -125,6 +314,14 @@ footer{
     .footer__logo {
       @extend .logo;
       color: white;
+    }
+
+    @media only screen and (min-width: 375px) and (max-width: 667px){
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5em 2em 5em 2em;
     }
 }
 
@@ -149,17 +346,8 @@ footer{
     }
 
 
-
-  .navbar {
-    padding: 2em 4em;
-  }
-
   .navbar-collapse {
     flex-grow: 0 !important;
-  }
-
-  .intro {
-    padding: 12em 1em 8em 1em;
   }
 
   .boton-portafolio {
@@ -177,6 +365,13 @@ footer{
       ul {
         flex-wrap: wrap;
       }
+
+      @media only screen and (min-width: 375px) and (max-width: 667px){
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        padding-bottom: 1em;
+      }
   }
 
   .redes {
@@ -184,6 +379,9 @@ footer{
     align-items: center;
     margin-left: 1em;
     margin-right: 1em;
+    @media only screen and (min-width: 375px) and (max-width: 667px){
+      order:-1;
+    }
   }
 
   .icono-redes {
@@ -192,50 +390,6 @@ footer{
     &:hover {
         opacity: 0.7;
     }
-  }
-
-
-  .portafolio-descripcion{
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    text-align: center;
-  }
-
-  .prueba-grid{
-    position: relative;
-  }
-
-  .overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    transition: .5s ease;
-    background-color: #00000067;
-  }
-
-  .prueba-grid .overlay {
-      &:hover {
-        opacity: 1;
-      }
-    
-    
-  }
-
-  .image {
-    display: block;
-    width: 100%;
-    height: auto;
-    
   }
 
 
