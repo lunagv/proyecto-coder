@@ -4,7 +4,7 @@
   box-sizing: border-box; }
 
 body {
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Space Mono', monospace;
   line-height: 1.6rem; }
   body a {
     color: inherit;
@@ -15,18 +15,27 @@ body {
 p {
   line-height: 1.5em; }
 
-.titular--resaltado {
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif; }
+
+strong {
   font-weight: 700; }
 
 .container {
   width: 85%; }
 
+.row {
+  max-width: 1120px;
+  margin: auto; }
+
 .container-fluid {
-  max-width: 1320px; }
+  max-width: 1320px;
+  padding-left: 3.2em;
+  padding-right: 3.2em; }
 
 .logo, nav ul .nav__logo, footer .footer__logo {
-  font-size: 1.2em;
-  font-weight: 800; }
+  font-weight: 700;
+  font-size: 1.2em; }
   .logo:hover, nav ul .nav__logo:hover, footer .footer__logo:hover {
     font-style: italic; }
 
@@ -243,7 +252,7 @@ footer {
   border-radius: 40px; }
 
 .me img {
-  width: 80%; }
+  width: 100%; }
 
 .contenedor-skill {
   width: 100%;
