@@ -1,74 +1,227 @@
-// Responsive mixins 
-// Bootstrap breakpoints
 
-@mixin tablet {
-  @media only screen and (min-width: 768px) {
-    @content;
+// Estilos generales
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  line-height: 1.6rem;
+  a{
+      color: inherit;
+      text-decoration: none;
+      &:hover {
+          color: inherit;
+      }
   }
-}
-
-@mixin desktop {
-  @media only screen and (min-width: 992px) {
-    @content;
   }
-}
 
-@mixin large {
-  @media only screen and (min-width: 1200px) {
-    @content;
+  p {
+    line-height: 1.5em;
   }
+
+.titular--resaltado{
+  font-weight: 700;
 }
 
-
-.me img {
-  width: 80%;
-}
 
 .container {
   width: 85%;
 }
 
 
-.contenedor-skill {
+.container-fluid{
+  max-width: 1320px;
+}
+
+.logo{
+  font-size: 1.2em;
+  font-weight: 800;
+      &:hover{
+          font-style: italic;
+      }
+}
+
+
+.intro-inicio {
+  text-align: center;
+  height: 100vh;
+}
+
+.bloque-boton {
+  margin-top: 2em;
+  text-align: center;
+}
+
+
+.boton {
+  border: 1px solid black;
+  color: black;
+  padding: 8px 30px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 40px;
+}
+
+.grid__img {
   width: 100%;
-  margin-bottom: 1em;
-  background-color: #dddddd;
-}
-.skill {
-  text-align: right; 
-  padding-top: 10px; 
-  padding-bottom: 10px; 
-  color: white;
+  height: 100%;
+  object-fit: cover;
 }
 
-.branding{
-  width: 90%; 
-  background-color: black;
-}
-.fotografia {
-  width: 80%; 
-  background-color:black;
-} 
-.web {width: 65%; 
-  background-color:black;
-} 
-.estrategia {
-  width: 65%; 
-  background-color: black;
-}
+//Navbar
 
-
-input[type=text], textarea {
+nav {
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  box-sizing: border-box;
-  border: none;
-  border-bottom: 1px solid black;
+  justify-content: center;
+  align-items: center;
+    a{
+      color: black;
+      text-decoration: none;
+      
+    }
+    ul {
+      font-size: 0.8em;
+      li{
+          padding-left: 2.5em;
+      }
+      
+      .nav__logo {
+        @extend .logo;
+        color: black;
+      }
+      
+    }
+    
+}
+
+.navbar-collapse {
+  flex-grow: 0 !important;
+}
+
+.link {
+  cursor: pointer;
+  font-size: 1.2em;
+  position: relative;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.link::before,
+.link::after {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  top: 100%;
+  left: 0;
+  pointer-events: none;
+}
+
+.link::before {
+  content: '';
+}
+
+.link--metis::before {
+  transform-origin: 100% 50%;
+  transform: scale3d(0, 1, 1);
+  transition: transform 0.3s;
+}
+
+.link--metis:hover::before {
+  transform-origin: 0% 50%;
+  transform: scale3d(1, 1, 1);
 }
 
 
-//Desaturar
+//Footer
+footer{
+  width: 100%;
+  padding: 7em 4em 6em 4em;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  align-items: center;
+    a {
+      
+      text-decoration: none;
+    }
+    ul{
+      font-size: 0.8em;
+      li{
+          padding-left: 2.2em;
+          a {
+            color: white !important;
+              &:hover{
+                  text-decoration: none;
+                  color: white;
+              }
+          }
+      }
+    }
+    .footer__logo {
+      @extend .logo;
+      color: white;
+    }
+
+    @media only screen and (min-width: 375px) and (max-width: 667px){
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5em 2em 5em 2em;
+    }
+}
+
+.footer-item {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 1em;
+    ul {
+      flex-wrap: wrap;
+    }
+
+    @media only screen and (min-width: 375px) and (max-width: 667px){
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      padding-bottom: 1em;
+    }
+}
+
+.redes {
+  justify-content: center;
+  align-items: center;
+  margin-left: 1em;
+  margin-right: 1em;
+  @media only screen and (min-width: 375px) and (max-width: 667px){
+    order:-1;
+  }
+}
+
+.icono-redes {
+  margin: 0.3em;
+  width: 30px;
+  &:hover {
+      opacity: 0.7;
+  }
+}
+
+
+// Seccion portafolio
+.boton-portafolio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6em;
+}
+
 .portafolio__bloque--desaturar {
 
   transition: .5s ease-in-out; 
@@ -82,11 +235,6 @@ input[type=text], textarea {
   filter: none;
 
 }
-
-.container-fluid{
-  max-width: 1320px;
-}
-
 
 .portafolio-descripcion{
   color: white;
@@ -113,112 +261,6 @@ input[type=text], textarea {
 
 }
 
-
-.overlay {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  transition: .5s ease;
-  background-color: #00000067;
-  
-}
-
-.prueba-grid .overlay {
-  transition: .5s ease-in-out; 
-  filter: grayscale(1);
-    &:hover {
-      opacity: 1;
-      
-    }
-  
-  
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-  
-}
-
-
-//Estilos hover menus
-.link {
-  cursor: pointer;
-  font-size: 1.1em;
-  position: relative;
-  white-space: nowrap;
-  color: var(--color-text);
-}
-
-.link::before,
-.link::after {
-  position: absolute;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  top: 100%;
-  left: 0;
-  pointer-events: none;
-}
-
-.link::before {
-  content: '';
-}
-
-.link--metis {
-  
-}
-
-.link--metis::before {
-  transform-origin: 100% 50%;
-  transform: scale3d(0, 1, 1);
-  transition: transform 0.3s;
-}
-
-.link--metis:hover::before {
-  transform-origin: 0% 50%;
-  transform: scale3d(1, 1, 1);
-}
-
-
-// Map para fondos en seccion About Me
-$colors: (
-  light: #f2f2f291,
-  dark: #dadada,
-);
-
-@each $name-color, $bgcolor in $colors {
-  .bg--#{$name-color} {
-    background-color: $bgcolor;
-  }
-}
-
-.nav--secundario {
-  background-color: map-get($colors,light);
-}
-
-// Extend de estilos del logotipo y grid
-.logo{
-  font-size: 1em;
-  font-weight: 800;
-      &:hover{
-          font-style: italic;
-      }
-}
-
-.grid__img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-//Mixin con parametros
 @mixin gridProperties($width, $height, $display,$gap,$overflow) {
   width: $width;
   height: $height;
@@ -258,169 +300,114 @@ $colors: (
 }
 
 
-
-nav {
-  display: flex;
-  flex-direction: column;
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-    a{
-      color: black;
-      text-decoration: none;
-      
-    }
-    ul {
-      font-size: 0.8em;
-      li{
-          padding-left: 2.5em;
-      }
-      
-      .nav__logo {
-        @extend .logo;
-        color: black;
-      }
-      
-    }
-    
-}
-
-
-
-footer{
-  width: 100%;
-  padding: 7em 4em 6em 4em;
-  display: flex;
-  flex-direction: row;
-  background-color: black;
-  align-items: center;
-    a {
-      
-      text-decoration: none;
-    }
-    ul{
-      font-size: 0.8em;
-      li{
-          padding-left: 2.2em;
-          a {
-            color: white !important;
-              &:hover{
-                  text-decoration: none;
-                  color: white;
-              }
-          }
-      }
-    }
-    .footer__logo {
-      @extend .logo;
-      color: white;
-    }
-
-    @media only screen and (min-width: 375px) and (max-width: 667px){
-      display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5em 2em 5em 2em;
-    }
-}
-
-// Estilos sin BEM
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-
-  body {
-    font-family: "JetBrains Mono", monospace;
-    line-height: 1.6rem;
-    a{
-        color: inherit;
-        text-decoration: none;
-        &:hover {
-            color: inherit;
-        }
-    }
-    }
-
-
-  .navbar-collapse {
-    flex-grow: 0 !important;
-  }
-
-  .boton-portafolio {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 6em;
-  }
-
-  .footer-item {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding-bottom: 1em;
-      ul {
-        flex-wrap: wrap;
-      }
-
-      @media only screen and (min-width: 375px) and (max-width: 667px){
-        display: flex;
-        justify-content: center;
-        width: 100%;
-        padding-bottom: 1em;
-      }
-  }
-
-  .redes {
-    justify-content: center;
-    align-items: center;
-    margin-left: 1em;
-    margin-right: 1em;
-    @media only screen and (min-width: 375px) and (max-width: 667px){
-      order:-1;
-    }
-  }
-
-  .icono-redes {
-    margin: 0.3em;
-    width: 30px;
-    &:hover {
-        opacity: 0.7;
-    }
-  }
-
-
-  .palabras-clave {
-    padding-top: 2em;
-  }
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #00000067;
   
-  .tag {
-    padding: 5px 10px 5px 10px;
-    text-align: center;
-    border: 1px solid black;
-    margin-right: 1em;
-    border-radius: 40px;
-  }
+}
 
-  .intro-inicio {
-    text-align: center;
-    height: 100vh;
-  }
+.prueba-grid .overlay {
+  transition: .5s ease-in-out; 
+  filter: grayscale(1);
+    &:hover {
+      opacity: 1;
+      
+    }
+  
+  
+}
 
-  .bloque-boton {
-    margin-top: 2em;
-    text-align: center;
-  }
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  
+}
 
 
-  .boton {
-    border: 1px solid black;
-    color: black;
-    padding: 8px 30px;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: 40px;
+.palabras-clave {
+  padding-top: 2em;
+}
+
+.tag {
+  padding: 5px 10px 5px 10px;
+  text-align: center;
+  border: 1px solid black;
+  margin-right: 1em;
+  border-radius: 40px;
+}
+
+
+// Estilos sección sobre mi
+.me {
+  img {
+    width: 80%;
   }
+}
+
+.contenedor-skill {
+  width: 100%;
+  margin-bottom: 1em;
+  background-color: #dddddd;
+}
+.skill {
+  text-align: right; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  color: white;
+}
+
+.branding{
+  width: 90%; 
+  background-color: black;
+}
+.fotografia {
+  width: 80%; 
+  background-color:black;
+} 
+.web {width: 65%; 
+  background-color:black;
+} 
+.estrategia {
+  width: 65%; 
+  background-color: black;
+}
+
+// Seccion contacto
+input[type=text], textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+$colors: (
+  light: #f2f2f291,
+  dark: #dadada,
+);
+
+@each $name-color, $bgcolor in $colors {
+  .bg--#{$name-color} {
+    background-color: $bgcolor;
+  }
+}
+
+.nav--secundario {
+  background-color: map-get($colors,light);
+}
+
+// Extend de estilos del logotipo y grid
+
+
+
+
