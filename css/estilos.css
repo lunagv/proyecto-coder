@@ -33,6 +33,7 @@ strong {
   padding-left: 3.2em;
   padding-right: 3.2em; }
 
+
 .logo, nav ul .nav__logo, footer .footer__logo {
   font-weight: 700;
   font-size: 1.2em; }
@@ -190,8 +191,14 @@ footer {
 
 .prueba-grid {
   position: relative;
-  transition: .5s ease-in-out;
-  filter: grayscale(1); }
+  filter: gray; /* IE5+ */
+      -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+      -webkit-transition: all .8s ease-in-out;   }
+
+.prueba-grid:hover {
+  filter: none;
+      -webkit-filter: grayscale(0);
+}
 
 .overlay img:hover {
   filter: none; }

@@ -5,7 +5,8 @@
         <meta name="author" content="Vanessa Luna">
         <meta name="description"
             content="Portafolio de diseño gráfico">
-        <meta name="keywords" content="logotipo, branding, diseño gráfico, estrategia de marca, diseño web">
+        <meta name="keywords" content="diseño gráfico, stand comercial, diseño editorial, photoshop, illustrator, estrategia de marca, branding, cartel">
+        <!-- Metadatas obligatorios -->
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,19 +23,124 @@
         <link rel="stylesheet" href="/path/to/cdn/bootstrap.min.css">
         <title>Vanessa Luna | Diseñadora gráfica</title>
     </head>
-<body>
-    <div class="intro-inicio row align-items-center" data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0">
-        <div class="col">
-        <h1>There are a million solutions to one problem.</h1>
-        <div class="bloque-boton">
-            <a href="portafolio.html" class="boton">Entrar</a>
+<body data-aos="fade-zoom-in" data-aos-easing="ease-in-back" data-aos-delay="300" data-aos-offset="0">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" id="top">
+            <div class="pt-5 mb-5 container-fluid ">
+                <div class="logo">
+                    <a class="nav__logo" href="index.html">Vanessa Luna</a>
+                </div>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                        <li class="nav-item">
+                            <a class="link link--metis" aria-current="page" href="index.html">Portafolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="link link--metis" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Portafolio</a></li>
+                        <li><a class="dropdown-item" href="#">Contacto</a></li>
+                    </ul>
+                </div>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <section class=" row align-items-center justify-content-center pt-5 mb-5">
+            <div class="col-sm-6 col-lg-6">
+                <h1 class="pt-3 pb-5 ">
+                    ¡Hola!  👋🏻 <br>Soy Vanessa Luna, diseñadora gráfica y desarrolladora web con sede en México.
+                </h1>
+                <div class="d-flex pt-5 align-items-center justify-content-center">
+                    <a href="#trabajo"><img src="assets/flecha.svg" alt=""></a>
+                </div>
             </div>
-        </div>
+        </section>
+        <section class="grid__container--tercios container pt-5" id="trabajo">
+            <a href="bagon.html">
+                <div class="prueba-grid grid-item">
+                    <img  src="portafolio/proyecto1.jpg" alt="Bagon" class="image grid-img">
+                    <div class="overlay">
+                        <div class="portafolio-descripcion">Blossom</div>
+                    </div>
+                </div>
+                </a>
+                
+            <a href="progmatic.html">
+            <div class="prueba-grid grid-item portafolio__bloque--desaturar">
+                <img src="portafolio/proyecto5.png" alt="Progmatic" class="image grid-img">
+                <div class="overlay">
+                    <div class="portafolio-descripcion">Progmatic</div>
+                </div>
+            </div>
+            </a>
+            <a href="metrica-life.html">
+            <div class="prueba-grid grid-item">
+                <img  src="portafolio/proyecto4.png" alt="Metrica Life" class="image grid-img">
+                <div class="overlay">
+                    <div class="portafolio-descripcion">Metrica Life</div>
+                </div>
+            </div>
+            </a>
+            <a href="nawi.html">
+            <div class="prueba-grid grid-item">
+                <img  src="portafolio/thumb-proyecto8.png" alt="Nawi" class="image grid-img">
+                <div class="overlay">
+                    <div class="portafolio-descripcion">Nawi</div>
+                </div>
+            </div>
+            </a>
+            
+            <a href="ultranormal.html">
+            <div class="prueba-grid grid-item">
+                <img  src="portafolio/proyecto6.png" alt="Ultranormal Podcast" class="image grid-img">
+                <div class="overlay">
+                    <div class="portafolio-descripcion">Ultranormal Podcast</div>
+                </div>
+            </div>
+            </a>
+            <div class="prueba-grid grid-item">
+                <img  src="portafolio/proyecto3.png" alt="Otros" class="image grid-img">
+                <a href="otros.html">
+                <div class="overlay">
+                    <div class="portafolio-descripcion">Otros</div>
+                </div>
+            </a>
+            </div>
+            
+        </section>
     </div>
+    <div class="boton-portafolio">
+        <a href="#top">Volver arriba &UpArrow;</a>
+    </div>
+    <footer>
+        <div class="menu-2 footer-item  navbar-expand">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="link link--metis" href="index.html">Portafolio</a></li>
+                <li class="nav-item"><a class="link link--metis href="sobre-mi.html">Sobre mi</a></li>
+                <li class="nav-item"><a  class="link link--metis"href="contacto.html">Contacto</a></li>
+            </ul>
+        </div>
+        <div class="redes footer-item">
+            <a href="https://www.behance.net/lunaobake" target="_blank"><img class="icono-redes" src="assets/behance.svg" alt="Behance"></a>
+            <a href="https://www.linkedin.com/in/lunagv/" target="_blank"><img class="icono-redes" src="assets/linkedin.svg" alt="LinkedIn"></a>
+        </div>
+        <div class="logo-footer footer-item">
+            <a href="#">
+                <span class="footer__logo">Vanessa Luna</span>
+            </a>
+        </div>
+    </footer>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
     AOS.init();
     </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
