@@ -1,13 +1,15 @@
 {
   "name": "pruebas-sass",
   "version": "1.0.0",
-  "description": "Avances del proyecto final para el curso de Desarrollo Web en CoderHouse",
+  "description": "Portafolio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "node-sass --include-path scss scss/estilos.scss css/estilos.css",
-    "watch-css": "nodemon -e scss -x \"npm run build-css\""
-  },
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "build-css": "node-sass --include-path scss scss/estilos.scss css/estilos.css",
+  "watch-css": "nodemon -e scss -x \"npm run build-css\"",
+  "build": "npm run build-css"
+}
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lunagv/proyecto-coder.git"
