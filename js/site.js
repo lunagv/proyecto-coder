@@ -30,34 +30,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const filterButtons = document.querySelectorAll('[data-filter]');
   const workItems = document.querySelectorAll('[data-categories]');
-  let filterTimer;
+  const workEntries = Array.from(workItems).map((item) => ({
+    item,
+    categories: new Set(item.dataset.categories.split(' '))
+  }));
+  let filterFrame;
 
   filterButtons.forEach((button) => {
+    button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
+
     button.addEventListener('click', () => {
       const filter = button.dataset.filter;
 
-      filterButtons.forEach((item) => item.classList.toggle('active', item === button));
-      clearTimeout(filterTimer);
-
-      workItems.forEach((item) => {
-        const categories = item.dataset.categories.split(' ');
-        const shouldShow = filter === 'all' || categories.includes(filter);
-
-        if (shouldShow) {
-          item.hidden = false;
-          requestAnimationFrame(() => item.classList.remove('filtered-out'));
-        } else {
-          item.classList.add('filtered-out');
-        }
+      filterButtons.forEach((item) => {
+        const isActive = item === button;
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-pressed', String(isActive));
       });
 
-      filterTimer = setTimeout(() => {
-        workItems.forEach((item) => {
-          if (item.classList.contains('filtered-out')) {
-            item.hidden = true;
-          }
-        });
-      }, 220);
+      document.body.classList.add('is-filtering');
+      cancelAnimationFrame(filterFrame);
+
+      workEntries.forEach(({ item, categories }) => {
+        const shouldShow = filter === 'all' || categories.has(filter);
+
+        item.hidden = !shouldShow;
+        item.classList.toggle('filtered-out', !shouldShow);
+      });
+
+      filterFrame = requestAnimationFrame(() => {
+        requestAnimationFrame(() => document.body.classList.remove('is-filtering'));
+      });
     });
   });
 

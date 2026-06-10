@@ -1,4 +1,4 @@
-* {
+﻿* {
   padding: 0;
   margin: 0;
   box-sizing: border-box; }
@@ -492,6 +492,10 @@ body.home-v2 {
     font-size: 13px;
     line-height: 1.2;
     color: var(--muted); }
+    body.home-v2 .hero-copy .kicker a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px; }
   body.home-v2 .hero-still {
     position: relative;
     min-height: 360px;
@@ -593,8 +597,22 @@ body.home-v2 {
     body.home-v2 .section-heading a {
       font-family: 'Inter', sans-serif;
       color: var(--muted);
-      font-size: 11px;
-      font-weight: 400; }
+      font-size: 13px;
+      font-weight: 500; }
+    body.home-v2 .section-heading a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text); }
+      body.home-v2 .section-heading a::after {
+        content: none; }
+      body.home-v2 .section-heading a svg {
+        width: 18px;
+        height: 18px;
+        flex: 0 0 auto;
+        transition: transform 180ms ease; }
+      body.home-v2 .section-heading a:hover svg {
+        transform: translateX(3px); }
   body.home-v2 .project-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -605,7 +623,6 @@ body.home-v2 {
     body.home-v2 .project-card.filtered-out {
       opacity: 0;
       transform: translateY(10px) scale(0.985);
-      filter: blur(3px);
       pointer-events: none; }
     body.home-v2 .project-card .card-img {
       overflow: hidden;
@@ -786,6 +803,10 @@ body.home-v2 {
       color: var(--text);
       font-size: 14px;
       font-weight: 500; }
+      body.home-v2 .experience-grid strong a {
+        color: inherit;
+        text-decoration: underline;
+        text-underline-offset: 3px; }
   body.home-v2 .brands-section h2 {
     max-width: 330px;
     margin: 0 0 80px;
@@ -804,7 +825,7 @@ body.home-v2 {
     min-width: max-content;
     display: flex;
     align-items: center;
-    gap: clamp(40px, 5vw, 72px);
+    gap: clamp(56px, 7vw, 116px);
     margin: 0;
     padding: 0;
     list-style: none;
@@ -815,13 +836,16 @@ body.home-v2 {
     body.home-v2 .brand-strip img {
       display: block;
       width: auto;
-      height: 120px;
-      max-width: 320px;
+      height: clamp(150px, 12vw, 210px);
+      max-width: 420px;
       object-fit: contain;
       filter: grayscale(0.12);
       opacity: 0.75; }
   body.home-v2 .brand-marquee:hover .brand-strip {
     animation-play-state: paused; }
+  body.home-v2.is-filtering .archive-grid .project-card {
+    animation: none !important;
+    transition: none; }
 @keyframes brand-marquee {
   from {
     transform: translateX(0); }
@@ -905,6 +929,8 @@ body.home-v2 {
       padding: 0;
       color: var(--muted);
       font: 400 13px/1 'Inter', sans-serif;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
       cursor: pointer; }
       body.home-v2 .archive-filters button.active,
       body.home-v2 .archive-filters button:hover {
@@ -913,6 +939,9 @@ body.home-v2 {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 58px 42px; }
+    body.home-v2 .archive-grid .project-card {
+      contain: layout paint;
+      transition: none; }
     body.home-v2 .archive-grid .project-card[hidden] {
       display: none; }
   body.home-v2 .playground-hero {
@@ -1090,19 +1119,28 @@ body.home-v2 {
   body.home-v2 .project-visit {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     font-weight: 600;
     font-size: 14px;
     text-decoration: none;
     margin-top: 28px;
-    color: var(--muted);
+    color: var(--text);
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
     transition: color 180ms ease; }
+  body.home-v2 .project-visit svg {
+    order: 2;
+    width: 18px;
+    height: 18px;
+    flex: 0 0 auto;
+    transition: transform 180ms ease; }
+  body.home-v2 .project-visit::after {
+    content: none; }
   body.home-v2 .project-visit:hover {
     color: var(--bright); }
+    body.home-v2 .project-visit:hover svg {
+      transform: translateX(3px); }
 
-/* ── Zurbana / project detail extensions ─────────────────────────── */
+/* Zurbana / project detail extensions */
   body.home-v2 .project-hero--wide {
     grid-template-columns: minmax(0, 1fr) minmax(260px, 0.6fr);
     align-items: start;
@@ -1294,10 +1332,30 @@ body.home-v2 .image-modal__nav:hover {
   body.home-v2 .archive-hero {
     padding: 40px 0 32px; }
   body.home-v2 .archive-filters {
-    margin-bottom: 40px; }
+    flex-wrap: nowrap;
+    gap: 18px;
+    overflow-x: auto;
+    margin: 0 -16px 40px;
+    padding: 0 16px 10px;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch; }
+  body.home-v2 .archive-filters::-webkit-scrollbar {
+    display: none; }
+  body.home-v2 .archive-filters button {
+    flex: 0 0 auto;
+    min-height: 34px; }
   body.home-v2 .archive-grid,
   body.home-v2 .playground-grid {
     grid-template-columns: 1fr; }
+  body.home-v2 .archive-grid .project-card,
+  body.home-v2 .archive-grid .project-card img {
+    animation: none !important;
+    transition: none !important; }
+  body.home-v2 .archive-grid .project-card img,
+  body.home-v2 .archive-grid .project-card:hover img {
+    filter: none;
+    transform: none; }
   body.home-v2 .project-hero {
     min-height: auto;
     grid-template-columns: 1fr;
@@ -1347,10 +1405,10 @@ body.home-v2 .image-modal__nav:hover {
   body.home-v2 .brands-section h2 {
     margin-bottom: 40px; }
   body.home-v2 .brand-strip {
-    gap: 36px; }
+    gap: 48px; }
   body.home-v2 .brand-strip img {
-    height: 64px;
-    max-width: 200px; }
+    height: 118px;
+    max-width: 300px; }
   body.home-v2 .home-footer {
     display: block;
     padding: 48px 0 56px; }
@@ -1419,7 +1477,7 @@ body.home-v2 .image-modal__nav:hover {
     border-width: 5px;
     border-radius: 14px; } }
 
-/* ── Animaciones de entrada ─────────────────────────────────────── */
+/* Animaciones de entrada */
 @keyframes anim-fade-up {
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -1504,21 +1562,13 @@ body.home-v2.js-loaded .playground-grid a:nth-child(5)  { animation: anim-fade-u
 body.home-v2.js-loaded .case-gallery a:nth-child(6),
 body.home-v2.js-loaded .playground-grid a:nth-child(6)  { animation: anim-fade-up 0.55s 0.79s ease both; }
 
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(1),
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(1) { animation: anim-fade-up 0.55s 0.45s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(2),
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(2) { animation: anim-fade-up 0.55s 0.53s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(3),
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(3) { animation: anim-fade-up 0.55s 0.61s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(4),
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(4) { animation: anim-fade-up 0.55s 0.66s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(5),
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(5) { animation: anim-fade-up 0.55s 0.71s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(6),
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(6) { animation: anim-fade-up 0.55s 0.76s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(7)  { animation: anim-fade-up 0.55s 0.81s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(8)  { animation: anim-fade-up 0.55s 0.86s ease both; }
-body.home-v2.js-loaded .archive-grid .project-card:nth-child(9)  { animation: anim-fade-up 0.55s 0.91s ease both; }
+body.home-v2.js-loaded .archive-grid .project-card { opacity: 1; animation: none; }
 
 body.home-v2.js-loaded .experience-grid article:nth-child(1) { animation: anim-fade-up 0.5s 0.35s ease both; }
 body.home-v2.js-loaded .experience-grid article:nth-child(2) { animation: anim-fade-up 0.5s 0.45s ease both; }
