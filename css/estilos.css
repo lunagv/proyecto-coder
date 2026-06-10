@@ -481,9 +481,9 @@ body.home-v2 {
     line-height: 1.03;
     letter-spacing: 0; }
   body.home-v2 .hero-copy p {
-    max-width: 660px;
+    max-width: 620px;
     color: var(--muted);
-    font-size: clamp(16px, 1.22vw, 20px);
+    font-size: clamp(14px, 1.05vw, 17px);
     font-weight: 400;
     line-height: 1.45;
     margin: 0; }
