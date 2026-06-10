@@ -233,12 +233,12 @@
     const day = dayStr.charAt(0).toUpperCase() + dayStr.slice(1);
 
     document.querySelectorAll('.site-time').forEach(el => {
-      el.innerHTML = `${timeStr}<span class="header-tz">${day} Â· MÃ©xico</span>`;
+      el.innerHTML = `${timeStr}<span class="header-tz">${day} - México</span>`;
       el.setAttribute('datetime', timeStr);
     });
 
     document.querySelectorAll('.home-footer time').forEach(el => {
-      el.innerHTML = `${timeStr}<br><span class="footer-tz">${day} Â· MÃ©xico</span>`;
+      el.innerHTML = `${timeStr}<br><span class="footer-tz">${day} - México</span>`;
     });
   }
 
