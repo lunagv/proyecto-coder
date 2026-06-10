@@ -606,12 +606,13 @@ body.home-v2 {
       color: var(--text); }
       body.home-v2 .section-heading a::after {
         content: none; }
-      body.home-v2 .section-heading a svg {
+      body.home-v2 .section-heading a .link-arrow {
         width: 18px;
         height: 18px;
+        display: block;
         flex: 0 0 auto;
         transition: transform 180ms ease; }
-      body.home-v2 .section-heading a:hover svg {
+      body.home-v2 .section-heading a:hover .link-arrow {
         transform: translateX(3px); }
   body.home-v2 .project-grid {
     display: grid;
@@ -1127,17 +1128,18 @@ body.home-v2 {
     color: var(--text);
     font-family: 'Inter', sans-serif;
     transition: color 180ms ease; }
-  body.home-v2 .project-visit svg {
+  body.home-v2 .project-visit .link-arrow {
     order: 2;
     width: 18px;
     height: 18px;
+    display: block;
     flex: 0 0 auto;
     transition: transform 180ms ease; }
   body.home-v2 .project-visit::after {
     content: none; }
   body.home-v2 .project-visit:hover {
     color: var(--bright); }
-    body.home-v2 .project-visit:hover svg {
+    body.home-v2 .project-visit:hover .link-arrow {
       transform: translateX(3px); }
 
 /* Zurbana / project detail extensions */
