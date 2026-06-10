@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta name="author" content="Vanessa Luna">
@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/estilos.css">
     <title>Vanessa Luna | Diseñadora de producto digital</title>
 </head>
@@ -31,12 +31,18 @@
                 <p class="kicker">Co-fundadora en nomorebi</p>
                 <p>Seis años entre marcas, interfaces y código. Diseño productos fintech, sistemas visuales y experiencias digitales.</p>
             </div>
-            <div class="hero-still" aria-hidden="true">
-                <img class="hero-avatar" src="assets/ea05ae958719df50e5460b6718a4bbcf-sticker.png" alt="">
-                <div class="coffee-cup"></div>
-                <div class="plant">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
+            <div class="hero-still">
+                <button class="hero-object hero-avatar" type="button" data-draggable aria-label="Arrastrar sticker">
+                    <small class="drag-tooltip">Arrástrame por aquí</small>
+                    <img src="assets/ea05ae958719df50e5460b6718a4bbcf-sticker.png" alt="Sticker de Vanessa saludando">
+                </button>
+                <button class="hero-object coffee-cup" type="button" data-draggable aria-label="Arrastrar taza">
+                    <small class="drag-tooltip">Drag &amp; drop</small>
+                </button>
+                <button class="hero-object plant" type="button" data-draggable aria-label="Arrastrar planta">
+                    <small class="drag-tooltip">Mueve la plantita</small>
+                    <span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span><span class="leaf"></span>
+                </button>
             </div>
         </section>
 
@@ -89,20 +95,32 @@
         </section>
 
         <section class="section-block services-section">
-            <article class="service-feature">
-                <div class="service-thumb" aria-hidden="true">
-                    <span></span>
-                </div>
-                <p>Dirección de arte</p>
-                <h3>Definición visual de productos y marcas usando fotografía, IA y composición.</h3>
-            </article>
-            <div class="service-list">
-                <a href="progmatic.html"><span>01</span>Diseño de producto<i>→</i></a>
-                <a href="ultranormal.html"><span>02</span>Diseño web<i>→</i></a>
-                <a href="metrica-life.html"><span>03</span>Sistemas visuales<i>→</i></a>
-                <a href="madestdurango.html"><span>04</span>Branding<i>→</i></a>
-                <a class="active" href="otros.html"><span>05</span>Dirección de arte<i>→</i></a>
+            <div class="services-copy">
+                <h2>Te ayudo con...</h2>
+                <p>Estéticas digitales que conectan con personas, marcas y productos que necesitan sentirse claros, vivos y memorables.</p>
             </div>
+
+            <div class="service-deck" aria-hidden="true">
+                <article class="service-card service-card--phone"><span>UX</span></article>
+                <article class="service-card service-card--identity"><span>Marca</span></article>
+                <article class="service-card service-card--system"><span>Retícula</span></article>
+                <article class="service-card service-card--motion"><span>Animación</span></article>
+                <article class="service-card service-card--ai"><span>IA</span></article>
+                <article class="service-card service-card--web"><span>Web</span></article>
+                <article class="service-card service-card--art"><span>Arte</span></article>
+            </div>
+
+            <ul class="service-capabilities" aria-label="Servicios y capacidades">
+                <li>Diseño de producto</li>
+                <li>Dirección de arte</li>
+                <li>Branding</li>
+                <li>Diseño web / apps</li>
+                <li>Fotografía e IA</li>
+                <li>Redes sociales</li>
+                <li>Sistemas visuales</li>
+                <li>Identidad visual</li>
+                <li>Iconografía</li>
+            </ul>
         </section>
 
         <section class="section-block experience-section">
@@ -128,15 +146,28 @@
 
         <section class="section-block brands-section">
             <h2>6 años diseñando y (ayudando)<br>a hacer cosas para marcas<br>como:</h2>
-            <ul class="brand-strip" aria-label="Marcas">
-                <li>Starbucks</li>
-                <li>Puesto</li>
-                <li>Veeleaf</li>
-                <li>xibe</li>
-                <li>zurbana</li>
-                <li>Altan</li>
-                <li>Claro pay</li>
-            </ul>
+            <div class="brand-marquee" aria-label="Marcas">
+                <ul class="brand-strip">
+                    <li><img src="assets/intelligentia2.png" alt="Intelligentia"></li>
+                    <li><img src="assets/labrujeria2.png" alt="La Brujería"></li>
+                    <li><img src="assets/puesto2.png" alt="Puesto"></li>
+                    <li><img src="assets/veeleaf2.png" alt="Veeleaf"></li>
+                    <li><img src="assets/xibe2.png" alt="Xibe"></li>
+                    <li><img src="assets/zurbana2.png" alt="Zurbana"></li>
+                    <li><img src="assets/altan2.png" alt="Altán"></li>
+                    <li><img src="assets/claro2.png" alt="Claro Pay"></li>
+                </ul>
+                <ul class="brand-strip" aria-hidden="true">
+                    <li><img src="assets/intelligentia2.png" alt=""></li>
+                    <li><img src="assets/labrujeria2.png" alt=""></li>
+                    <li><img src="assets/puesto2.png" alt=""></li>
+                    <li><img src="assets/veeleaf2.png" alt=""></li>
+                    <li><img src="assets/xibe2.png" alt=""></li>
+                    <li><img src="assets/zurbana2.png" alt=""></li>
+                    <li><img src="assets/altan2.png" alt=""></li>
+                    <li><img src="assets/claro2.png" alt=""></li>
+                </ul>
+            </div>
         </section>
     </main>
 
