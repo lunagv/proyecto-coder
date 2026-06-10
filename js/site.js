@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => document.body.classList.add('js-loaded'));
   const menuButton = document.querySelector('.menu-button');
 
   if (menuButton) {
@@ -6,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
     overlay.className = 'fullscreen-menu';
     overlay.setAttribute('aria-label', 'Menu principal');
     overlay.innerHTML = `
-      <a href="/">Home</a>
-      <a href="work.html">Work</a>
+      <a href="/">Inicio</a>
+      <a href="work.html">Proyectos</a>
       <a href="otros.html">Playground</a>
     `;
     document.body.appendChild(overlay);
@@ -215,6 +216,60 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if (event.key === 'ArrowRight') {
         loadImage(activeIndex + 1);
+      }
+    });
+  }
+
+  function updateClocks() {
+    const tz = 'America/Mexico_City';
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('es-MX', {
+      timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+    });
+    const dayStr = now.toLocaleDateString('es-MX', { timeZone: tz, weekday: 'long' });
+    const day = dayStr.charAt(0).toUpperCase() + dayStr.slice(1);
+
+    document.querySelectorAll('.site-time').forEach(el => {
+      el.innerHTML = `${timeStr}<span class="header-tz">${day} · México</span>`;
+      el.setAttribute('datetime', timeStr);
+    });
+
+    document.querySelectorAll('.home-footer time').forEach(el => {
+      el.innerHTML = `${timeStr}<br><span class="footer-tz">${day} · México</span>`;
+    });
+  }
+
+  updateClocks();
+  setInterval(updateClocks, 1000);
+
+  // Custom cursor (only on pointer: fine devices)
+  if (window.matchMedia('(pointer: fine)').matches) {
+    const cursor = document.createElement('div');
+    cursor.className = 'x-cursor';
+    cursor.innerHTML = `<span class="x-cursor__label"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2.5C4.5 2.5 2.3 4.1 1 7c1.3 2.9 3.5 4.5 6 4.5s4.7-1.6 6-4.5C11.7 4.1 9.5 2.5 7 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="7" cy="7" r="1.8" fill="currentColor"/></svg>Ver proyecto</span>`;
+    document.body.appendChild(cursor);
+    cursor.style.transform = 'translate(-999px, -999px)';
+
+    let raf;
+
+    document.addEventListener('mousemove', e => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      });
+    });
+
+    function updateCursorState(e) {
+      const el = e.target.closest('a, button, [data-draggable]');
+      const card = e.target.closest('.project-card');
+      cursor.classList.toggle('is-link', !!el && !card);
+      cursor.classList.toggle('is-project', !!card);
+    }
+
+    document.addEventListener('mouseover', updateCursorState);
+    document.addEventListener('mouseout', e => {
+      if (!e.relatedTarget || !e.relatedTarget.closest('a, button, [data-draggable], .project-card')) {
+        cursor.classList.remove('is-link', 'is-project');
       }
     });
   }
