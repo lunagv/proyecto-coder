@@ -4,12 +4,13 @@
 
   if (menuButton) {
     const overlay = document.createElement('nav');
+    const rootPrefix = window.location.pathname.includes('/case-studies/') ? '../../' : '';
     overlay.className = 'fullscreen-menu';
     overlay.setAttribute('aria-label', 'Menu principal');
     overlay.innerHTML = `
-      <a href="/">Inicio</a>
-      <a href="work.html">Proyectos</a>
-      <a href="otros.html">Exploraciones</a>
+      <a href="${rootPrefix}index.html">Inicio</a>
+      <a href="${rootPrefix}work.html">Proyectos</a>
+      <a href="${rootPrefix}otros.html">Exploraciones</a>
     `;
     document.body.appendChild(overlay);
 
@@ -35,6 +36,20 @@
     categories: new Set(item.dataset.categories.split(' '))
   }));
   let filterFrame;
+
+  filterButtons.forEach((button) => {
+    const filter = button.dataset.filter;
+    const count = filter === 'all'
+      ? workEntries.length
+      : workEntries.filter(({ categories }) => categories.has(filter)).length;
+    const counter = document.createElement('span');
+
+    counter.className = 'filter-count';
+    counter.textContent = count;
+    counter.setAttribute('aria-hidden', 'true');
+    button.appendChild(counter);
+    button.setAttribute('aria-label', `${button.textContent.trim()} (${count})`);
+  });
 
   filterButtons.forEach((button) => {
     button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
