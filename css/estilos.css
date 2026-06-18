@@ -1109,14 +1109,16 @@ body.home-v2 {
       background: #181818;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.07); }
-    body.home-v2 .case-gallery img {
+    body.home-v2 .case-gallery img,
+    body.home-v2 .case-gallery video {
       width: 100%;
       aspect-ratio: 8/6;
       display: block;
       object-fit: cover;
       filter: grayscale(0.12);
       transition: filter 220ms ease, transform 280ms ease; }
-    body.home-v2 .case-gallery a:hover img {
+    body.home-v2 .case-gallery a:hover img,
+    body.home-v2 .case-gallery a:hover video {
       filter: grayscale(0.08);
       transform: scale(1.04); }
   body.home-v2 .project-back {
