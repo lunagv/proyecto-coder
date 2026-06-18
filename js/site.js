@@ -4,13 +4,12 @@
 
   if (menuButton) {
     const overlay = document.createElement('nav');
-    const rootPrefix = window.location.pathname.includes('/case-studies/') ? '../../' : '';
     overlay.className = 'fullscreen-menu';
     overlay.setAttribute('aria-label', 'Menu principal');
     overlay.innerHTML = `
-      <a href="${rootPrefix}index.html">Inicio</a>
-      <a href="${rootPrefix}work.html">Proyectos</a>
-      <a href="${rootPrefix}otros.html">Exploraciones</a>
+      <a href="index.html">Inicio</a>
+      <a href="work.html">Proyectos</a>
+      <a href="otros.html">Exploraciones</a>
     `;
     document.body.appendChild(overlay);
 
@@ -151,47 +150,75 @@
     });
   });
 
-  const modalLinks = document.querySelectorAll('[data-modal-src]');
+  const modalLinks = Array.from(document.querySelectorAll('[data-modal-src]'));
+  const mediaItems = modalLinks.map((link) => {
+      const thumbnail = link.querySelector('img');
+      const src = link.dataset.modalSrc;
+      const type = link.dataset.modalType || (/\.(mp4|webm|mov)(\?|#|$)/i.test(src) ? 'video' : 'image');
+      return {
+        trigger: link,
+        src,
+        type,
+        title: link.dataset.modalTitle || thumbnail?.alt || ''
+      };
+    }).filter((item) => item.src);
 
-  if (modalLinks.length) {
+  if (mediaItems.length) {
     const modal = document.createElement('div');
     modal.className = 'image-modal';
     modal.setAttribute('role', 'dialog');
     modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-label', 'Vista ampliada de imagen');
+    modal.setAttribute('aria-label', 'Vista ampliada de media');
     modal.innerHTML = `
       <button class="image-modal__close" type="button" aria-label="Cerrar">&times;</button>
-      <button class="image-modal__nav image-modal__nav--prev" type="button" aria-label="Imagen anterior">&larr;</button>
+      <button class="image-modal__nav image-modal__nav--prev" type="button" aria-label="Media anterior">&larr;</button>
       <figure class="image-modal__frame">
-        <img src="" alt="">
+        <div class="image-modal__media"></div>
         <figcaption></figcaption>
       </figure>
-      <button class="image-modal__nav image-modal__nav--next" type="button" aria-label="Imagen siguiente">&rarr;</button>
+      <button class="image-modal__nav image-modal__nav--next" type="button" aria-label="Media siguiente">&rarr;</button>
     `;
     document.body.appendChild(modal);
 
-    const modalImage = modal.querySelector('img');
+    const modalMedia = modal.querySelector('.image-modal__media');
     const modalCaption = modal.querySelector('figcaption');
     const closeButton = modal.querySelector('.image-modal__close');
     const prevButton = modal.querySelector('.image-modal__nav--prev');
     const nextButton = modal.querySelector('.image-modal__nav--next');
-    const galleryItems = Array.from(modalLinks);
     let activeIndex = 0;
 
-    const loadImage = (index) => {
-      activeIndex = (index + galleryItems.length) % galleryItems.length;
-      const link = galleryItems[activeIndex];
-      const thumbnail = link.querySelector('img');
-      modalImage.src = link.dataset.modalSrc;
-      modalImage.alt = thumbnail?.alt || link.dataset.modalTitle || '';
-      modalCaption.textContent = link.dataset.modalTitle || '';
-      const hideNavigation = galleryItems.length < 2;
+    const clearModalMedia = () => {
+      modalMedia.querySelectorAll('video').forEach((video) => video.pause());
+      modalMedia.replaceChildren();
+    };
+
+    const loadMedia = (index) => {
+      activeIndex = (index + mediaItems.length) % mediaItems.length;
+      const item = mediaItems[activeIndex];
+      clearModalMedia();
+
+      if (item.type === 'video') {
+        const video = document.createElement('video');
+        video.src = item.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        modalMedia.appendChild(video);
+      } else {
+        const image = document.createElement('img');
+        image.src = item.src;
+        image.alt = item.title;
+        modalMedia.appendChild(image);
+      }
+
+      modalCaption.textContent = item.title;
+      const hideNavigation = mediaItems.length < 2;
       prevButton.hidden = hideNavigation;
       nextButton.hidden = hideNavigation;
     };
 
     const openModal = (index) => {
-      loadImage(index);
+      loadMedia(index);
       document.body.classList.add('modal-open');
       modal.classList.add('is-open');
       closeButton.focus();
@@ -200,21 +227,37 @@
     const closeModal = () => {
       document.body.classList.remove('modal-open');
       modal.classList.remove('is-open');
-      modalImage.removeAttribute('src');
-      modalImage.alt = '';
+      clearModalMedia();
       modalCaption.textContent = '';
     };
 
-    galleryItems.forEach((link, index) => {
-      link.addEventListener('click', (event) => {
+    mediaItems.forEach(({ trigger }, index) => {
+      const figure = trigger.closest('figure');
+      trigger.classList.add('js-lightbox-trigger');
+      figure?.classList.add('has-lightbox-media');
+
+      if (!trigger.matches('a')) {
+        trigger.setAttribute('tabindex', '0');
+        trigger.setAttribute('role', 'button');
+        trigger.setAttribute('aria-label', 'Abrir media ampliado');
+      }
+
+      const openFromTrigger = (event) => {
         event.preventDefault();
         openModal(index);
+      };
+
+      trigger.addEventListener('click', openFromTrigger);
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          openFromTrigger(event);
+        }
       });
     });
 
     closeButton.addEventListener('click', closeModal);
-    prevButton.addEventListener('click', () => loadImage(activeIndex - 1));
-    nextButton.addEventListener('click', () => loadImage(activeIndex + 1));
+    prevButton.addEventListener('click', () => loadMedia(activeIndex - 1));
+    nextButton.addEventListener('click', () => loadMedia(activeIndex + 1));
     modal.addEventListener('click', (event) => {
       if (event.target === modal) {
         closeModal();
@@ -230,10 +273,10 @@
         closeModal();
       }
       if (event.key === 'ArrowLeft') {
-        loadImage(activeIndex - 1);
+        loadMedia(activeIndex - 1);
       }
       if (event.key === 'ArrowRight') {
-        loadImage(activeIndex + 1);
+        loadMedia(activeIndex + 1);
       }
     });
   }
