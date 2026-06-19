@@ -7,23 +7,44 @@
     overlay.className = 'fullscreen-menu';
     overlay.setAttribute('aria-label', 'Menu principal');
     overlay.innerHTML = `
-      <a href="index.html">Inicio</a>
-      <a href="work.html">Proyectos</a>
-      <a href="otros.html">Exploraciones</a>
+      <a href="index.html" data-label="Inicio"><span>Inicio</span></a>
+      <a href="work.html" data-label="Proyectos"><span>Proyectos</span></a>
+      <a href="otros.html" data-label="Playground"><span>Playground</span></a>
     `;
     document.body.appendChild(overlay);
 
     menuButton.setAttribute('aria-expanded', 'false');
+    const closeMenu = (afterClose) => {
+      document.body.classList.add('menu-closing');
+      document.body.classList.remove('menu-open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Abrir menu');
+      window.setTimeout(() => {
+        document.body.classList.remove('menu-closing');
+        if (afterClose) afterClose();
+      }, 980);
+    };
+
     menuButton.addEventListener('click', () => {
-      const isOpen = document.body.classList.toggle('menu-open');
-      menuButton.setAttribute('aria-expanded', String(isOpen));
-      menuButton.setAttribute('aria-label', isOpen ? 'Cerrar menu' : 'Abrir menu');
+      if (document.body.classList.contains('menu-open')) {
+        closeMenu();
+        return;
+      }
+      document.body.classList.remove('menu-closing');
+      document.body.classList.add('menu-open');
+      menuButton.setAttribute('aria-expanded', 'true');
+      menuButton.setAttribute('aria-label', 'Cerrar menu');
     });
 
     overlay.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        document.body.classList.remove('menu-open');
-        menuButton.setAttribute('aria-expanded', 'false');
+      link.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === '_blank') {
+          return;
+        }
+        event.preventDefault();
+        closeMenu(() => {
+          window.location.href = link.href;
+        });
       });
     });
   }
