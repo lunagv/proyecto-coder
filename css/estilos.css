@@ -1073,6 +1073,12 @@ body.home-v2 {
       font-size: clamp(15px, 1.15vw, 19px);
       font-weight: 300;
       line-height: 1.38; }
+    body.home-v2 .project-hero .project-credit {
+      margin-top: 18px;
+      color: rgba(255,255,255,0.42);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.01em; }
   body.home-v2 .project-meta {
     display: grid;
     gap: 26px;
