@@ -7,9 +7,9 @@
     overlay.className = 'fullscreen-menu';
     overlay.setAttribute('aria-label', 'Menu principal');
     overlay.innerHTML = `
-      <a href="index.html" data-label="Inicio"><span>Inicio</span></a>
-      <a href="work.html" data-label="Proyectos"><span>Proyectos</span></a>
-      <a href="otros.html" data-label="Playground"><span>Playground</span></a>
+      <a href="index.html">Inicio</a>
+      <a href="work.html">Proyectos</a>
+      <a href="otros.html">Playground</a>
     `;
     document.body.appendChild(overlay);
 

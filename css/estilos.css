@@ -478,15 +478,6 @@ body.home-v2 {
       opacity: 0;
       transform: translateY(46px);
       transition: color 260ms ease, opacity 560ms ease, transform 760ms cubic-bezier(0.22, 1, 0.36, 1); }
-      body.home-v2 .fullscreen-menu a span,
-      body.home-v2 .fullscreen-menu a::after {
-        display: block;
-        transition: transform 680ms cubic-bezier(0.22, 1, 0.36, 1); }
-      body.home-v2 .fullscreen-menu a::after {
-        content: attr(data-label);
-        position: absolute;
-        inset: 0 0 auto;
-        transform: translateY(145%); }
   body.home-v2.menu-open .fullscreen-menu {
     opacity: 1;
     pointer-events: auto;
@@ -505,10 +496,6 @@ body.home-v2 {
       color: rgba(255,255,255,0.9);
       transition-delay: 0ms;
       transform: translateY(0); }
-      body.home-v2.menu-open .fullscreen-menu a:focus-visible span {
-        transform: translateY(-145%); }
-      body.home-v2.menu-open .fullscreen-menu a:focus-visible::after {
-        transform: translateY(0); }
     @media (hover: hover) and (pointer: fine) {
       body.home-v2.menu-open .fullscreen-menu:has(a:hover) a:not(:hover) {
         color: rgba(255,255,255,0.52);
@@ -517,11 +504,7 @@ body.home-v2 {
       body.home-v2.menu-open .fullscreen-menu a:hover {
         color: rgba(255,255,255,0.9);
         transition-delay: 0ms;
-        transform: translateY(0); }
-        body.home-v2.menu-open .fullscreen-menu a:hover span {
-          transform: translateY(-145%); }
-        body.home-v2.menu-open .fullscreen-menu a:hover::after {
-          transform: translateY(0); } }
+        transform: translateY(0); } }
   body.home-v2.menu-closing .fullscreen-menu {
     opacity: 1;
     pointer-events: none;
