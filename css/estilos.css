@@ -1465,9 +1465,9 @@ body.home-v2 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 28px; }
   body.home-v2 .playground-section {
-    padding-bottom: 0; }
+    padding-bottom: clamp(56px, 7vw, 96px); }
   body.home-v2 main:has(.playground-section) + .home-footer {
-    padding-top: 32px; }
+    padding-top: clamp(44px, 5vw, 72px); }
     body.home-v2 .playground-grid a {
       display: block;
       position: relative;
@@ -2155,6 +2155,7 @@ body.home-v2.js-loaded .case-gallery a:nth-child(5),
 body.home-v2.js-loaded .playground-grid a:nth-child(5)  { animation: anim-fade-up 0.55s 0.74s ease both; }
 body.home-v2.js-loaded .case-gallery a:nth-child(6),
 body.home-v2.js-loaded .playground-grid a:nth-child(6)  { animation: anim-fade-up 0.55s 0.79s ease both; }
+body.home-v2.js-loaded .playground-grid a:nth-child(n+7) { animation: anim-fade-up 0.55s 0.84s ease both; }
 
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(1) { animation: anim-fade-up 0.55s 0.45s ease both; }
 body.home-v2.js-loaded .project-grid  .project-card:nth-child(2) { animation: anim-fade-up 0.55s 0.53s ease both; }
