@@ -71,6 +71,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     });
+  const revealSections = document.querySelectorAll(
+    '.home-index .experience-section, .home-index .featured-group, .home-index .playground-callout, .home-index .services-section, .home-index .brands-section'
+  );
+
+  if (revealSections.length) {
+    if ('IntersectionObserver' in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      }, {
+        rootMargin: '0px 0px -12% 0px',
+        threshold: 0.12
+      });
+
+      revealSections.forEach((section) => revealObserver.observe(section));
+    } else {
+      revealSections.forEach((section) => section.classList.add('is-visible'));
+    }
+  }
+
   }
 
   const filterButtons = document.querySelectorAll('[data-filter-value]');

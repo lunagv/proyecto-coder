@@ -2177,3 +2177,82 @@ body.home-v2.js-loaded .home-footer nav  { animation: anim-fade-up 0.5s 0.18s ea
 body.home-v2.js-loaded .home-footer time { animation: anim-fade-up 0.5s 0.26s ease both; }
 
 
+body.home-v2.home-index.js-loaded .experience-section h2,
+body.home-v2.home-index.js-loaded .experience-grid article,
+body.home-v2.home-index.js-loaded .featured-group-heading,
+body.home-v2.home-index.js-loaded .project-grid .project-card,
+body.home-v2.home-index.js-loaded .playground-callout a,
+body.home-v2.home-index.js-loaded .playground-callout p,
+body.home-v2.home-index.js-loaded .services-copy,
+body.home-v2.home-index.js-loaded .service-capabilities,
+body.home-v2.home-index.js-loaded .brands-section h2,
+body.home-v2.home-index.js-loaded .brand-marquee {
+  animation: none;
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+body.home-v2.home-index.js-loaded .experience-section.is-visible h2,
+body.home-v2.home-index.js-loaded .experience-section.is-visible .experience-grid article,
+body.home-v2.home-index.js-loaded .featured-group.is-visible .featured-group-heading,
+body.home-v2.home-index.js-loaded .featured-group.is-visible .project-card,
+body.home-v2.home-index.js-loaded .playground-callout.is-visible a,
+body.home-v2.home-index.js-loaded .playground-callout.is-visible p,
+body.home-v2.home-index.js-loaded .services-section.is-visible .services-copy,
+body.home-v2.home-index.js-loaded .services-section.is-visible .service-capabilities,
+body.home-v2.home-index.js-loaded .brands-section.is-visible h2,
+body.home-v2.home-index.js-loaded .brands-section.is-visible .brand-marquee {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.home-v2.home-index.js-loaded .experience-section h2,
+body.home-v2.home-index.js-loaded .featured-group-heading,
+body.home-v2.home-index.js-loaded .playground-callout a,
+body.home-v2.home-index.js-loaded .services-copy,
+body.home-v2.home-index.js-loaded .brands-section h2 {
+  --reveal-delay: 0ms;
+}
+
+body.home-v2.home-index.js-loaded .experience-grid article:nth-child(1),
+body.home-v2.home-index.js-loaded .featured-group .project-card:nth-child(1),
+body.home-v2.home-index.js-loaded .playground-callout p,
+body.home-v2.home-index.js-loaded .service-capabilities,
+body.home-v2.home-index.js-loaded .brand-marquee {
+  --reveal-delay: 90ms;
+}
+
+body.home-v2.home-index.js-loaded .experience-grid article:nth-child(2),
+body.home-v2.home-index.js-loaded .featured-group .project-card:nth-child(2) {
+  --reveal-delay: 150ms;
+}
+
+body.home-v2.home-index.js-loaded .experience-grid article:nth-child(3),
+body.home-v2.home-index.js-loaded .featured-group .project-card:nth-child(3) {
+  --reveal-delay: 210ms;
+}
+
+body.home-v2.home-index.js-loaded .featured-group .project-card:nth-child(4) {
+  --reveal-delay: 270ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home-v2.home-index.js-loaded .experience-section h2,
+  body.home-v2.home-index.js-loaded .experience-grid article,
+  body.home-v2.home-index.js-loaded .featured-group-heading,
+  body.home-v2.home-index.js-loaded .project-grid .project-card,
+  body.home-v2.home-index.js-loaded .playground-callout a,
+  body.home-v2.home-index.js-loaded .playground-callout p,
+  body.home-v2.home-index.js-loaded .services-copy,
+  body.home-v2.home-index.js-loaded .service-capabilities,
+  body.home-v2.home-index.js-loaded .brands-section h2,
+  body.home-v2.home-index.js-loaded .brand-marquee {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
