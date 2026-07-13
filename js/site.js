@@ -464,6 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
         video.src = item.src;
         video.controls = true;
         video.autoplay = true;
+        video.loop = true;
         video.playsInline = true;
         modalMedia.appendChild(video);
       } else {
@@ -584,6 +585,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCursorState(e) {
       const el = e.target.closest('a, button, [data-draggable]');
       const card = e.target.closest('.project-card');
+      const label = cursor.querySelector('.x-cursor__label');
+      if (label && card) {
+        label.innerHTML = card.dataset.cursorLabel || `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 2.5C4.5 2.5 2.3 4.1 1 7c1.3 2.9 3.5 4.5 6 4.5s4.7-1.6 6-4.5C11.7 4.1 9.5 2.5 7 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="7" cy="7" r="1.8" fill="currentColor"/></svg>Ver proyecto`;
+      }
       cursor.classList.toggle('is-link', !!el && !card);
       cursor.classList.toggle('is-project', !!card);
     }
