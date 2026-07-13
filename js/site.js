@@ -1,6 +1,30 @@
-﻿document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   requestAnimationFrame(() => document.body.classList.add('js-loaded'));
   const menuButton = document.querySelector('.menu-button');
+  const siteHeader = document.querySelector('.site-header');
+
+  if (siteHeader && !siteHeader.querySelector('.desktop-nav')) {
+    const desktopNav = document.createElement('nav');
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const links = [
+      { href: 'index.html', label: 'Inicio', pages: ['index.html', ''] },
+      { href: 'otros.html', label: 'Playground', pages: ['otros.html'] },
+      { href: 'work.html', label: 'Archivo', pages: ['work.html'] }
+    ];
+
+    desktopNav.className = 'desktop-nav';
+    desktopNav.setAttribute('aria-label', 'Navegación principal');
+    desktopNav.innerHTML = links.map((link) => {
+      const activeClass = link.pages.includes(currentPage) ? ' class="active"' : '';
+      return `<a href="${link.href}"${activeClass}>${link.label}</a>`;
+    }).join('');
+
+    if (menuButton) {
+      siteHeader.insertBefore(desktopNav, menuButton);
+    } else {
+      siteHeader.appendChild(desktopNav);
+    }
+  }
 
   if (menuButton) {
     const overlay = document.createElement('nav');
@@ -8,8 +32,8 @@
     overlay.setAttribute('aria-label', 'Menu principal');
     overlay.innerHTML = `
       <a href="index.html">Inicio</a>
-      <a href="work.html">Proyectos</a>
       <a href="otros.html">Playground</a>
+      <a href="work.html">Archivo</a>
     `;
     document.body.appendChild(overlay);
 
@@ -49,54 +73,271 @@
     });
   }
 
-  const filterButtons = document.querySelectorAll('[data-filter]');
+  const filterButtons = document.querySelectorAll('[data-filter-value]');
   const workItems = document.querySelectorAll('[data-categories]');
+  const archiveGrid = document.querySelector('.archive-grid');
+  const archiveFilterMenus = document.querySelectorAll('.archive-filter-menu[data-filter-group]');
+  const archiveFilterToggles = document.querySelectorAll('[data-filter-toggle]');
+  const archiveFilterClearButtons = document.querySelectorAll('[data-filter-clear]');
+  const archiveClearAllButton = document.querySelector('[data-clear-all-filters]');
+  const archiveViewButtons = document.querySelectorAll('[data-archive-view]');
+  const filterLabels = {
+    all: 'Todos',
+    'ux-ui': 'UX/UI',
+    'product-design': 'Product Design',
+    'web-design': 'Diseño web',
+    'art-direction': 'Dirección de arte',
+    branding: 'Identidad visual',
+    'social-media': 'Redes sociales',
+    fintech: 'Fintech',
+    hospitality: 'Hospitality',
+    retail: 'Retail',
+    bienestar: 'Bienestar',
+    tecnologia: 'Tecnología',
+    industrial: 'Industrial',
+    servicios: 'Servicios',
+    eventos: 'Eventos'
+  };
   const workEntries = Array.from(workItems).map((item) => ({
     item,
-    categories: new Set(item.dataset.categories.split(' '))
+    categories: new Set((item.dataset.categories || '').split(' ').filter(Boolean)),
+    sector: item.dataset.sector || 'all'
   }));
+  const activeArchiveFilters = {
+    category: 'all',
+    sector: 'all'
+  };
   let filterFrame;
 
-  filterButtons.forEach((button) => {
-    const filter = button.dataset.filter;
-    const count = filter === 'all'
-      ? workEntries.length
-      : workEntries.filter(({ categories }) => categories.has(filter)).length;
-    const counter = document.createElement('span');
+  if (archiveGrid) {
+    const savedArchiveView = localStorage.getItem('archive-view') || 'columns';
+    const setArchiveView = (view) => {
+      const nextView = view === 'grid' ? 'grid' : 'columns';
 
-    counter.className = 'filter-count';
-    counter.textContent = count;
-    counter.setAttribute('aria-hidden', 'true');
-    button.appendChild(counter);
-    button.setAttribute('aria-label', `${button.textContent.trim()} (${count})`);
+      archiveGrid.classList.toggle('archive-grid--grid', nextView === 'grid');
+      archiveGrid.classList.toggle('archive-grid--columns', nextView === 'columns');
+      localStorage.setItem('archive-view', nextView);
+
+      archiveViewButtons.forEach((button) => {
+        const isActive = button.dataset.archiveView === nextView;
+        button.classList.toggle('active', isActive);
+        button.setAttribute('aria-pressed', String(isActive));
+      });
+    };
+
+    setArchiveView(savedArchiveView);
+
+    archiveViewButtons.forEach((button) => {
+      button.addEventListener('click', () => setArchiveView(button.dataset.archiveView));
+    });
+  }
+
+  const closeArchiveFilters = () => {
+    archiveFilterMenus.forEach((menu) => menu.classList.remove('is-open'));
+    archiveFilterToggles.forEach((toggle) => toggle.setAttribute('aria-expanded', 'false'));
+  };
+
+  archiveFilterToggles.forEach((toggle) => {
+    toggle.addEventListener('click', () => {
+      const menu = toggle.closest('.archive-filter-menu');
+      const wasOpen = menu?.classList.contains('is-open');
+
+      closeArchiveFilters();
+
+      if (!wasOpen && menu) {
+        menu.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
+    });
   });
+
+  if (archiveFilterMenus.length) {
+    document.addEventListener('click', (event) => {
+      if (event.target.closest('.archive-filter-menu')) {
+        return;
+      }
+      closeArchiveFilters();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') {
+        return;
+      }
+      closeArchiveFilters();
+    });
+  }
+
+  const matchesArchiveFilters = (entry, overrideGroup, overrideValue) => {
+    const categoryFilter = overrideGroup === 'category' ? overrideValue : activeArchiveFilters.category;
+    const sectorFilter = overrideGroup === 'sector' ? overrideValue : activeArchiveFilters.sector;
+    const categoryMatch = categoryFilter === 'all' || entry.categories.has(categoryFilter);
+    const sectorMatch = sectorFilter === 'all' || entry.sector === sectorFilter;
+
+    return categoryMatch && sectorMatch;
+  };
+
+  const updateFilterCounts = () => {
+    filterButtons.forEach((button) => {
+      const menu = button.closest('.archive-filter-menu');
+      const group = menu?.dataset.filterGroup;
+      const filter = button.dataset.filterValue;
+      const baseLabel = button.dataset.baseLabel || button.textContent.trim().replace(/\s+\(\d+\)$/, '');
+      const count = workEntries.filter((entry) => matchesArchiveFilters(entry, group, filter)).length;
+      let counter = button.querySelector('.filter-count');
+
+      button.dataset.baseLabel = baseLabel;
+      if (!counter) {
+        counter = document.createElement('span');
+        counter.className = 'filter-count';
+        counter.setAttribute('aria-hidden', 'true');
+        button.appendChild(counter);
+      }
+
+      counter.textContent = `(${count})`;
+      button.setAttribute('aria-label', `${baseLabel} (${count})`);
+      button.disabled = count === 0 && filter !== 'all';
+      button.classList.toggle('is-available', count > 0);
+      button.classList.toggle('is-unavailable', count === 0 && filter !== 'all');
+    });
+  };
+
+  const updateFilterClearButtons = () => {
+    const hasActiveFilters = Object.values(activeArchiveFilters).some((value) => value !== 'all');
+
+    archiveFilterClearButtons.forEach((clearButton) => {
+      const group = clearButton.dataset.filterClear;
+      clearButton.hidden = !group || activeArchiveFilters[group] === 'all';
+    });
+
+    if (archiveClearAllButton) {
+      archiveClearAllButton.hidden = !hasActiveFilters;
+    }
+  };
+
+  const applyArchiveFilters = () => {
+    if (archiveGrid) {
+      const activeFilters = Object.values(activeArchiveFilters).filter((value) => value !== 'all');
+      archiveGrid.dataset.activeFilter = activeFilters.length ? activeFilters.join('-') : 'all';
+    }
+
+    document.body.classList.add('is-filtering');
+    cancelAnimationFrame(filterFrame);
+
+    workEntries.forEach((entry) => {
+      const shouldShow = matchesArchiveFilters(entry);
+
+      entry.item.hidden = !shouldShow;
+      entry.item.classList.toggle('filtered-out', !shouldShow);
+    });
+
+    updateFilterCounts();
+    updateFilterClearButtons();
+
+    filterFrame = requestAnimationFrame(() => {
+      requestAnimationFrame(() => document.body.classList.remove('is-filtering'));
+    });
+  };
+
+  updateFilterCounts();
 
   filterButtons.forEach((button) => {
     button.setAttribute('aria-pressed', button.classList.contains('active') ? 'true' : 'false');
 
     button.addEventListener('click', () => {
-      const filter = button.dataset.filter;
+      const menu = button.closest('.archive-filter-menu');
+      const group = menu?.dataset.filterGroup;
+      const filter = button.dataset.filterValue;
 
-      filterButtons.forEach((item) => {
+      if (!group) {
+        return;
+      }
+
+      activeArchiveFilters[group] = filter;
+      if (menu) {
+        const label = menu.querySelector('[data-filter-label]');
+        const defaultLabel = label?.dataset.defaultLabel || '';
+
+        if (label) {
+          label.textContent = filter === 'all'
+            ? defaultLabel
+            : `${defaultLabel}: ${filterLabels[filter] || button.getAttribute('aria-label')?.replace(/\s+\(\d+\)$/, '') || filter}`;
+        }
+      }
+
+      menu?.querySelectorAll('[data-filter-value]').forEach((item) => {
         const isActive = item === button;
         item.classList.toggle('active', isActive);
         item.setAttribute('aria-pressed', String(isActive));
       });
 
-      document.body.classList.add('is-filtering');
-      cancelAnimationFrame(filterFrame);
-
-      workEntries.forEach(({ item, categories }) => {
-        const shouldShow = filter === 'all' || categories.has(filter);
-
-        item.hidden = !shouldShow;
-        item.classList.toggle('filtered-out', !shouldShow);
-      });
-
-      filterFrame = requestAnimationFrame(() => {
-        requestAnimationFrame(() => document.body.classList.remove('is-filtering'));
-      });
+      closeArchiveFilters();
+      applyArchiveFilters();
     });
+  });
+
+  const clearArchiveFilter = (group) => {
+
+    if (!group) {
+      return;
+    }
+
+    activeArchiveFilters[group] = 'all';
+
+    const menu = document.querySelector(`.archive-filter-menu[data-filter-group="${group}"]`);
+    const label = menu?.querySelector('[data-filter-label]');
+    const defaultLabel = label?.dataset.defaultLabel || '';
+
+    if (label) {
+      label.textContent = defaultLabel;
+    }
+
+    menu?.querySelectorAll('[data-filter-value]').forEach((item) => {
+      const isActive = item.dataset.filterValue === 'all';
+      item.classList.toggle('active', isActive);
+      item.setAttribute('aria-pressed', String(isActive));
+    });
+
+    applyArchiveFilters();
+  };
+
+  const resetArchiveFilterGroup = (group) => {
+    const menu = document.querySelector(`.archive-filter-menu[data-filter-group="${group}"]`);
+    const label = menu?.querySelector('[data-filter-label]');
+    const defaultLabel = label?.dataset.defaultLabel || '';
+
+    activeArchiveFilters[group] = 'all';
+
+    if (label) {
+      label.textContent = defaultLabel;
+    }
+
+    menu?.querySelectorAll('[data-filter-value]').forEach((item) => {
+      const isActive = item.dataset.filterValue === 'all';
+      item.classList.toggle('active', isActive);
+      item.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  archiveFilterClearButtons.forEach((clearButton) => {
+    const handleClear = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      clearArchiveFilter(clearButton.dataset.filterClear);
+    };
+
+    clearButton.addEventListener('click', handleClear);
+    clearButton.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+      handleClear(event);
+    });
+  });
+
+  archiveClearAllButton?.addEventListener('click', () => {
+    Object.keys(activeArchiveFilters).forEach(resetArchiveFilterGroup);
+    closeArchiveFilters();
+    applyArchiveFilters();
   });
 
   const draggableHeroItems = document.querySelectorAll('[data-draggable]');
@@ -305,19 +546,18 @@
   function updateClocks() {
     const tz = 'America/Mexico_City';
     const now = new Date();
-    const timeStr = now.toLocaleTimeString('es-MX', {
+    const timeStr = now.toLocaleTimeString('en-US', {
       timeZone: tz, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-    });
-    const dayStr = now.toLocaleDateString('es-MX', { timeZone: tz, weekday: 'long' });
-    const day = dayStr.charAt(0).toUpperCase() + dayStr.slice(1);
+    }).replace(/\s/g, ' ');
+    const timezoneLabel = 'CDMX · GMT-6';
 
     document.querySelectorAll('.site-time').forEach(el => {
-      el.innerHTML = `${timeStr}<span class="header-tz">${day} - México</span>`;
+      el.innerHTML = `${timeStr}<span class="header-tz">${timezoneLabel}</span>`;
       el.setAttribute('datetime', timeStr);
     });
 
     document.querySelectorAll('.home-footer time').forEach(el => {
-      el.innerHTML = `${timeStr}<br><span class="footer-tz">${day} - México</span>`;
+      el.innerHTML = `${timeStr}<span class="footer-tz">${timezoneLabel}</span>`;
     });
   }
 
