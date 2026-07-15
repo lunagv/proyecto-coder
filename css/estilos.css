@@ -2625,6 +2625,7 @@ body.home-v2.home-index.js-loaded .featured-group .project-card:nth-child(4) {
     font-size: clamp(32px, 9vw, 42px); }
   body.home-v2.about-page .about-hero--editorial .about-intro {
     max-width: none; }
+  body.home-v2.about-page .about-hero--editorial .about-intro p,
   body.home-v2.about-page .about-bullets {
     font-size: 15px; }
   body.home-v2.about-page .about-photo-section--editorial {
