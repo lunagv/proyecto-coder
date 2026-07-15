@@ -505,7 +505,7 @@ body.home-v2 {
       gap: 8px; }
     body.home-v2 .site-logo::after {
       display: inline;
-      font-size: 10px;
+      font-size: 12px;
       letter-spacing: 0.045em; }
     body.home-v2 .desktop-nav {
       display: none; } }
@@ -1946,8 +1946,8 @@ body.home-v2 {
     color: rgba(240, 241, 244, 0.42); }
   body.home-v2.about-page .about-photo-section--editorial {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(58px, 6vw, 92px) clamp(22px, 3vw, 36px);
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(58px, 6vw, 92px);
     align-items: start;
     padding-top: 0;
     border-top: 0; }
@@ -2631,14 +2631,33 @@ body.home-v2.home-index.js-loaded .featured-group .project-card:nth-child(4) {
     gap: 58px; }
   body.home-v2.about-page .about-photo-row,
   body.home-v2.about-page .about-photo-row--short {
-    --about-photo-width: min(100%, 320px);
+    --about-photo-width: 100%;
     grid-template-columns: var(--about-photo-width);
     gap: 12px;
     max-width: none; }
   body.home-v2.about-page .about-photo-section--editorial .about-photo-placeholder,
   body.home-v2.about-page .about-photo-section--editorial .about-photo-placeholder--portrait {
-    width: min(100%, 320px);
+    width: 100%;
     height: auto;
     min-height: 0;
-    aspect-ratio: auto; }
+    aspect-ratio: auto;
+    background: transparent; }
+  body.home-v2.about-page .about-photo-section--editorial .about-photo-placeholder img {
+    border-radius: 2px;
+    background: rgba(240, 241, 244, 0.025); }
+  body.home-v2.about-page .about-photo-section--editorial .about-photo-placeholder {
+    overflow: visible; }
+  body.home-v2.about-page .about-photo-section--editorial .about-photo-placeholder::after {
+    content: attr(data-cursor-label);
+    position: static;
+    display: block;
+    margin-top: 8px;
+    color: rgba(240, 241, 244, 0.48);
+    background: transparent;
+    border: 0;
+    font-family: 'Geist', 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.35;
+    letter-spacing: 0; }
 }
