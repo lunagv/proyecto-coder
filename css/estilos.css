@@ -2187,10 +2187,10 @@ body.home-v2 .image-modal__nav:hover {
     grid-column: auto; }
   body.home-v2 .archive-grid .project-card .card-img {
     height: auto;
-    aspect-ratio: 1 / 1; }
+    aspect-ratio: 1.55; }
   body.home-v2 .archive-grid[data-active-filter="all"] .project-card--wide .card-img {
     height: auto;
-    aspect-ratio: 1 / 1; }
+    aspect-ratio: 1.55; }
   body.home-v2 .archive-grid .project-card p {
     min-height: 0;
     align-content: flex-start; }
