@@ -75,6 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (window.HOME_FEATURED_CATEGORIES) {
+    document.querySelectorAll('.featured-group-heading').forEach((heading) => {
+      const title = heading.querySelector('h2')?.textContent.trim();
+      const link = heading.querySelector('.section-link');
+      const slug = title && window.HOME_FEATURED_CATEGORIES[title];
+
+      if (link && slug) {
+        link.href = `work.html?category=${slug}`;
+      }
+    });
+  }
+
   const revealSections = document.querySelectorAll(
     '.home-index .experience-section, .home-index .featured-group, .home-index .playground-callout, .home-index .services-section, .home-index .brands-section'
   );
@@ -302,6 +314,18 @@ document.addEventListener('DOMContentLoaded', () => {
       applyArchiveFilters();
     });
   });
+
+  if (archiveGrid) {
+    const requestedCategory = new URLSearchParams(window.location.search).get('category');
+    const requestedCategoryButton = requestedCategory
+      ? Array.from(filterButtons).find((button) => {
+        const menu = button.closest('.archive-filter-menu');
+        return menu?.dataset.filterGroup === 'category' && button.dataset.filterValue === requestedCategory;
+      })
+      : null;
+
+    requestedCategoryButton?.click();
+  }
 
   const clearArchiveFilter = (group) => {
 
